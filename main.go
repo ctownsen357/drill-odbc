@@ -20,15 +20,18 @@ func main() {
 	if err != nil {
 		panic(err)	
 	}
+	defer db.Close()
 
-	sql := "select * from dfs.`/home/ctownsend/projects/drill-odbc/test_data/`"
+	sql := "select PolicyID, LocationID, SomeValue from dfs.`/home/ctownsend/projects/drill-odbc/test_data/`"
+
+	fmt.Println(sql)
 
 	type rslt struct{
 		PolID int
 		LocID int
 		SomeVal int
 	}
-
+	
 	rows, err := db.Query(sql)
 	if err != nil {
 		panic(err)
